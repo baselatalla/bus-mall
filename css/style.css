@@ -35,10 +35,11 @@ main img{
 }
 
 button{
-    margin: 100px;
-    padding: 10px;
+    margin: 80px;
+    padding: 15px;
     background-color: crimson;
     color: cornsilk;
+    font-size: large;
 
 }
 
