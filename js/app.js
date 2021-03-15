@@ -58,7 +58,7 @@ productSection.addEventListener('click',clicker);
 
 
 function clicker(event){
-  if (numberOfRound !== 0){
+  
     if (event.target.id === 'firstImage' || event.target.id === 'secondImage' || event.target.id === 'thirdImage'){
       for(let i=0;i<Products.allProd.length;i++){
         if (Products.allProd[i].name === event.target.title){
@@ -69,18 +69,20 @@ function clicker(event){
       render();
       numberOfRound--;}
 
-    if (numberOfRound === 0 ){
-      let resultButton = document.createElement('button');
-      resultButton.innerText = 'View Results';
-      resultButton.id = 'result';
-      resultbutt.appendChild(resultButton);
-      let result = document.getElementById('result');
-      result.addEventListener('click',printer);
-
-    }
-  }
+      if (numberOfRound === 0 ){
+        productSection.addEventListener('click',clicker);
+        let resultButton = document.createElement('button');
+        resultButton.innerText = 'View Results';
+        resultButton.id = 'result';
+        resultbutt.appendChild(resultButton);
+        let result = document.getElementById('result');
+        result.addEventListener('click',printer);
+      
+      }
+  
 
 }
+
 function printer(){
   let viewResult = [];
   let unorderl =document.createElement('ul');
