@@ -109,7 +109,7 @@ function chartmaker(){
     ProductsViews.push(Products.allProd[i].views);
   }
   let chart = new Chart(context, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: ProductsNames,
       datasets: [{
