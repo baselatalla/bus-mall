@@ -8,7 +8,7 @@ header {
     font-family: 'Monoton', cursive;
 }
 h1{
-    display: inline-block;
+    display: inline;
     color: rgb(224, 116, 14);
     font-size: 50px;
     float: right;
@@ -48,7 +48,7 @@ li{
     padding: 5px;
 }
 aside{
-    display: inline-block;
+    display: inline;
     color: rgb(112, 28, 0);
     font-size: 20px;
     float: left;

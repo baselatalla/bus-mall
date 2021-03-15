@@ -7,6 +7,7 @@ let thirdImage=document.getElementById('thirdImage');
 let resultbutt = document.getElementById('resultbutt');
 let resultfield = document.getElementById('results');
 let numberOfRound = 25 ;
+let showresult = 0 ;
 const productNames = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','water-glass.jpg'];
 
 function Products(name){
@@ -67,23 +68,23 @@ function clicker(event){
         }
       }
       render();
-      numberOfRound--;}
-
+      numberOfRound--;
+      console.log(numberOfRound);}
       if (numberOfRound === 0 ){
-        productSection.addEventListener('click',clicker);
+        productSection.removeEventListener('click',clicker);
         let resultButton = document.createElement('button');
         resultButton.innerText = 'View Results';
         resultButton.id = 'result';
         resultbutt.appendChild(resultButton);
         let result = document.getElementById('result');
         result.addEventListener('click',printer);
-      
-      }
-  
+        
+}
 
 }
 
 function printer(){
+  if (showresult === 0){
   let viewResult = [];
   let unorderl =document.createElement('ul');
   for (let i = 0 ; i < Products.allProd.length ; i++ ){
@@ -91,8 +92,9 @@ function printer(){
     viewResult.innerText = Products.allProd[i].name+' had '+Products.allProd[i].votes+'votes and '+Products.allProd[i].views+'views';
     unorderl.appendChild(viewResult);
   }
-  console.log(Products.allProd[1].name);
-  resultfield.appendChild(unorderl);
+  
+  resultfield.appendChild(unorderl);}
+  showresult++;
 }
 
 render();
