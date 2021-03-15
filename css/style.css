@@ -7,8 +7,7 @@ header {
     background-color: black;
     font-family: 'Monoton', cursive;
 }
-h1{
-    display: inline;
+h1{ display: block;
     color: rgb(224, 116, 14);
     font-size: 50px;
     float: right;
@@ -16,11 +15,14 @@ h1{
     margin-top: 40px;
 }
 h2{
-    margin-left: 10%;
+    display: block;
+    text-align: center;
     margin-top: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(20, 20, 46);
     font-size: 40px;
+    float: right;
+    width: 100%;
 }
 main img{
     width: 280px;
@@ -28,14 +30,13 @@ main img{
     margin-top: 50px;
     margin-right: 5px;
     border-radius: 25px;
-
+    
 }
-#firstImage{
-    margin-left: 5%;
+#productSection{
+    float: right;
 }
-
 button{
-    margin: 80px;
+    margin: 10px;
     padding: 15px;
     background-color: crimson;
     color: cornsilk;
@@ -49,11 +50,10 @@ li{
 }
 aside{
     display: inline;
-    color: rgb(112, 28, 0);
+    color: rgb(39, 0, 146);
     font-size: 20px;
     float: left;
-    border: 2px solid rgb(224, 116, 14);
-    padding: 18px;
     margin-left: 5px;
+    font-family: monospace;
     
 }
