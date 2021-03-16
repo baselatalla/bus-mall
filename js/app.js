@@ -31,31 +31,33 @@ function randNumber(min, max) {
 }
 function render(){
   let fst1=randNumber(0,Products.allProd.length-1);
-  while (fst1 === image1 || fst1 === image3 || fst1 === image2 ){
+  while (fst1 === image1 || fst1 === image3 || fst1 === image2){
     fst1=randNumber(0,Products.allProd.length-1);}
   const fst1RndPord =Products.allProd[fst1];
   firstImage.src=fst1RndPord.path;
   firstImage.title=fst1RndPord.name;
   firstImage.alt=fst1RndPord.name;
   Products.allProd[fst1].views++;
-  image1 = fst1;
+
   let sec2=randNumber(0,Products.allProd.length-1);
-  while (sec2 === image2 || sec2 === image1 || sec2 === image3 ){
+  while (sec2 === image2 || sec2 === image1 || sec2 === image3 || sec2 === fst1){
     sec2=randNumber(0,Products.allProd.length-1);}
   const sec2RndPord=Products.allProd[sec2];
   secondImage.src=sec2RndPord.path;
   secondImage.title=sec2RndPord.name;
   secondImage.alt=sec2RndPord.name;
   Products.allProd[sec2].views++;
-  image2 = sec2;
+
   let third =randNumber(0,Products.allProd.length-1);
-  while ( third === image3 || third === image2 || third === image1){
+  while ( third === image3 || third === image2 || third === image1 || third === fst1 || third === sec2 ){
     third =randNumber(0,Products.allProd.length-1);}
   const thirdRandProd =Products.allProd[third];
   thirdImage.src=thirdRandProd.path;
   thirdImage.title=thirdRandProd.name;
   thirdImage.alt=thirdRandProd.name;
   Products.allProd[third].views++;
+  image1 = fst1;
+  image2 = sec2;
   image3 = third;
 }
 
