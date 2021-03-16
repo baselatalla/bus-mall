@@ -12,24 +12,32 @@ let image1 = '';
 let image2 = '';
 let image3= '';
 const productNames = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','water-glass.jpg'];
+Products.allProd=[];
+let unorderl =document.createElement('ul');
+
 function Products(name){
   this.name = name;
   this.path = `./img/${name}`;
   this.views = 0;
   this.votes = 0;
   Products.allProd.push(this);
+
 }
-Products.allProd=[];
+
 
 for(let i = 0 ; i < productNames.length ; i++){
   new Products(productNames[i]);
 }
 console.table(Products.allProd);
 
+
 function randNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
 function render(){
+
   let fst1=randNumber(0,Products.allProd.length-1);
   while (fst1 === image1 || fst1 === image3 || fst1 === image2){
     fst1=randNumber(0,Products.allProd.length-1);}
@@ -76,22 +84,32 @@ function clicker(event){
     numberOfRound--;
     console.log(numberOfRound);}
   if (numberOfRound === 0 ){
-    productSection.removeEventListener('click',clicker);
-    let resultButton = document.createElement('button');
-    resultButton.innerText = 'View Results';
-    resultButton.id = 'result';
-    resultbutt.appendChild(resultButton);
-    let result = document.getElementById('result');
-    result.addEventListener('click',printer);}
+    productSection.removeEventListener('click',clicker);}
+
+  localStorage.setItem('productsdata',JSON.stringify(Products.allProd));
+  console.log(Products.allProd);
 }
 
+let resultButton = document.createElement('button');
+resultButton.innerText = 'View Results';
+resultButton.id = 'result';
+resultbutt.appendChild(resultButton);
+let result = document.getElementById('result');
+result.addEventListener('click',printer);
+
 function printer(){
+  unorderl.textContent = '';
+  let unorderList=getProductData();
+  console.log(unorderList);
+  // go through the array and output the details of each drink in the array
+  if(unorderList === null){
+    unorderList=Products.allProd;
+  }
   if (showresult === 0){
     let viewResult = [];
-    let unorderl =document.createElement('ul');
-    for (let i = 0 ; i < Products.allProd.length ; i++ ){
+    for (let i = 0 ; i < unorderList.length ; i++ ){
       viewResult= document.createElement('li');
-      viewResult.innerText = Products.allProd[i].name+' had '+Products.allProd[i].votes+'votes and '+Products.allProd[i].views+'views';
+      viewResult.textContent =` ${unorderList[i].name} had ${unorderList[i].votes}  votes and ${unorderList[i].views}  views';`;
       unorderl.appendChild(viewResult);
     }
 
@@ -100,6 +118,7 @@ function printer(){
   chartmaker();
   showresult++;
 }
+
 function chartmaker(){
   let context = document.getElementById('myChart').getContext('2d');
   let ProductsNames=[];
@@ -110,6 +129,8 @@ function chartmaker(){
     ProductsVotes.push(Products.allProd[i].votes);
     ProductsViews.push(Products.allProd[i].views);
   }
+
+  // eslint-disable-next-line no-undef
   let chart = new Chart(context, {
     type: 'bar',
     data: {
@@ -143,47 +164,12 @@ function chartmaker(){
 }
 
 
+function getProductData(){
+  let data=localStorage.getItem('productsdata');
+  data=JSON.parse(data);
+  console.log(data);
+  return data;
+}
 
-// function chartmaker(){
-//   let context = document.getElementById('myChart').getContext('2d');
-//   let ProductsNames=[];
-//   let ProductsVotes=[];
-//   let ProductsViews=[];
-//   for(let i=0;i<Products.allProd.length;i++){
-//     ProductsNames.push(Products.allProd[i].name);
-//     ProductsVotes.push(Products.allProd[i].votes);
-//     ProductsViews.push(Products.allProd[i].views);
-//   }
-//   let chart = new Chart(context, {
-//     type: 'horizontalBar',
-//     data: {
-//       labels: ProductsNames,
-//       datasets: [{
-//         label: 'Products voting results',
-//         backgroundColor: 'rgb(139,0,0)',
-//         borderColor: 'rgb(220,20,60)',
-//         data: ProductsVotes,
-
-//       },
-//       {
-//         label: '# of views',
-//         backgroundColor: 'rgb(0,0,139)',
-//         borderColor: 'rgb(153,50,204)',
-//         data: ProductsViews,
-//       }
-//       ]
-
-//     },
-
-//     // Configuration options go here
-//     options: {
-//       scales: {
-//         xAxes: [{
-//           barPercentage: 0.4
-//         }]
-//       }
-//     }
-//   });
-// }
 render();
 
