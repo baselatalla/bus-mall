@@ -7,7 +7,6 @@ let thirdImage=document.getElementById('thirdImage');
 let resultbutt = document.getElementById('resultbutt');
 let resultfield = document.getElementById('results');
 let numberOfRound = 25 ;
-let showresult = 0 ;
 let image1 = '';
 let image2 = '';
 let image3= '';
@@ -24,10 +23,22 @@ function Products(name){
 
 }
 
-
 for(let i = 0 ; i < productNames.length ; i++){
   new Products(productNames[i]);
 }
+
+function retrieve() {
+  const data = JSON.parse(localStorage.getItem('productsdata'));
+  if (data) {
+    Products.allProd = JSON.parse(localStorage.getItem('productsdata'));
+    render();
+  } else {
+    render();
+  }
+}
+
+
+
 console.table(Products.allProd);
 
 
@@ -97,29 +108,19 @@ resultbutt.appendChild(resultButton);
 let result = document.getElementById('result');
 result.addEventListener('click',printer);
 
-
-let unorderList=getProductData();
-
 function printer(){
   unorderl.textContent = '';
-  unorderList=getProductData();
-  console.log(unorderList);
-  // go through the array and output the details of each drink in the array
-  if(unorderList === null){
-    unorderList=Products.allProd;
+  let viewResult = [];
+  for (let i = 0 ; i < Products.allProd.length ; i++ ){
+    viewResult= document.createElement('li');
+    viewResult.textContent =` ${Products.allProd[i].name} had ${Products.allProd[i].votes}  votes and ${Products.allProd[i].views}  views';`;
+    unorderl.appendChild(viewResult);
   }
-  if (showresult === 0){
-    let viewResult = [];
-    for (let i = 0 ; i < unorderList.length ; i++ ){
-      viewResult= document.createElement('li');
-      viewResult.textContent =` ${unorderList[i].name} had ${unorderList[i].votes}  votes and ${unorderList[i].views}  views';`;
-      unorderl.appendChild(viewResult);
-    }
 
-    resultfield.appendChild(unorderl);
-  }
+  resultfield.appendChild(unorderl);
+
   chartmaker();
-  showresult++;
+
 }
 
 function chartmaker(){
@@ -128,9 +129,9 @@ function chartmaker(){
   let ProductsVotes=[];
   let ProductsViews=[];
   for(let i=0;i<Products.allProd.length;i++){
-    ProductsNames.push(unorderList[i].name);
-    ProductsVotes.push(unorderList[i].votes);
-    ProductsViews.push(unorderList[i].views);
+    ProductsNames.push(Products.allProd[i].name);
+    ProductsVotes.push(Products.allProd[i].votes);
+    ProductsViews.push(Products.allProd[i].views);
   }
 
   // eslint-disable-next-line no-undef
@@ -167,12 +168,12 @@ function chartmaker(){
 }
 
 
-function getProductData(){
-  let data=localStorage.getItem('productsdata');
-  data=JSON.parse(data);
-  console.log(data);
-  return data;
-}
+// function getProductData(){
+//   let data=localStorage.getItem('productsdata');
+//   data=JSON.parse(data);
+//   console.log(data);
+//   return data;
+// }
 
-render();
+retrieve();
 
