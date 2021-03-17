@@ -97,9 +97,12 @@ resultbutt.appendChild(resultButton);
 let result = document.getElementById('result');
 result.addEventListener('click',printer);
 
+
+let unorderList=getProductData();
+
 function printer(){
   unorderl.textContent = '';
-  let unorderList=getProductData();
+  unorderList=getProductData();
   console.log(unorderList);
   // go through the array and output the details of each drink in the array
   if(unorderList === null){
@@ -125,9 +128,9 @@ function chartmaker(){
   let ProductsVotes=[];
   let ProductsViews=[];
   for(let i=0;i<Products.allProd.length;i++){
-    ProductsNames.push(Products.allProd[i].name);
-    ProductsVotes.push(Products.allProd[i].votes);
-    ProductsViews.push(Products.allProd[i].views);
+    ProductsNames.push(unorderList[i].name);
+    ProductsVotes.push(unorderList[i].votes);
+    ProductsViews.push(unorderList[i].views);
   }
 
   // eslint-disable-next-line no-undef
