@@ -27,7 +27,7 @@ for(let i = 0 ; i < productNames.length ; i++){
   new Products(productNames[i]);
 }
 
-function retrieve() {
+function getProductData() {
   const data = JSON.parse(localStorage.getItem('productsdata'));
   if (data) {
     Products.allProd = JSON.parse(localStorage.getItem('productsdata'));
@@ -175,5 +175,5 @@ function chartmaker(){
 //   return data;
 // }
 
-retrieve();
+getProductData();
 
