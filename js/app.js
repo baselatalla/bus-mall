@@ -1,5 +1,6 @@
 'use strict';
 
+// Declaring all necessary global variables
 let productSection=document.getElementById('productSection');
 let firstImage=document.getElementById('firstImage');
 let secondImage=document.getElementById('secondImage');
@@ -14,6 +15,7 @@ const productNames = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfa
 Products.allProd=[];
 let unorderl =document.createElement('ul');
 
+// A constracotr to creat different products (opjects)
 function Products(name){
   this.name = name;
   this.path = `./img/${name}`;
@@ -23,10 +25,12 @@ function Products(name){
 
 }
 
+// creating oobject for every produt
 for(let i = 0 ; i < productNames.length ; i++){
   new Products(productNames[i]);
 }
 
+// getting the data from the local storage
 function getProductData() {
   const data = JSON.parse(localStorage.getItem('productsdata'));
   if (data) {
@@ -41,12 +45,12 @@ function getProductData() {
 
 console.table(Products.allProd);
 
-
+// creat a random number.
 function randNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
+// a function to present three diferent images.
 function render(){
 
   let fst1=randNumber(0,Products.allProd.length-1);
@@ -80,6 +84,8 @@ function render(){
   image3 = third;
 }
 
+// assigning the votes and the views for each image
+
 productSection.addEventListener('click',clicker);
 
 
@@ -101,6 +107,7 @@ function clicker(event){
   console.log(Products.allProd);
 }
 
+// create a "shoe resulte" bottun
 let resultButton = document.createElement('button');
 resultButton.innerText = 'View Results';
 resultButton.id = 'result';
@@ -108,6 +115,7 @@ resultbutt.appendChild(resultButton);
 let result = document.getElementById('result');
 result.addEventListener('click',printer);
 
+// printing an unordered list containing the votes & views resulte.
 function printer(){
   unorderl.textContent = '';
   let viewResult = [];
@@ -123,6 +131,7 @@ function printer(){
 
 }
 
+// presenting the resulte in a chart using chart.js
 function chartmaker(){
   let context = document.getElementById('myChart').getContext('2d');
   let ProductsNames=[];
